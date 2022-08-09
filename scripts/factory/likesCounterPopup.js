@@ -1,0 +1,47 @@
+import ExtractDataFactory from "./data.js"
+
+export default class LikesCounterPopupFactory extends ExtractDataFactory {
+
+    constructor (totalLikes, price) {
+        super()
+        this.totalLikesCounter = totalLikes
+        this.price = `${price}€ / jour`
+    }
+
+    getLikesCounterPopupComponent () {
+
+        const likesCounterPopupSchema = {
+            popup: {
+                tagHTML: 'div',
+                root: true,
+                classnames: ['popup'],
+            },
+            likesWrapper: {
+                tagHTML: 'div',
+                parent: '.popup',
+                classnames: ['popup__likes-wrapper'],
+            },
+            totalLikesCounter: {
+                tagHTML: 'p',
+                parent: '.popup__likes-wrapper',
+                classnames: ['popup__total-likes-counter'],
+                text: this.totalLikesCounter,
+            },
+            likesIcon: {
+                tagHTML: 'i',
+                parent: '.popup__likes-wrapper',
+                classnames: ['popup__likes-icon', 'fa-solid', 'fa-heart'],
+            },
+            price: {
+                tagHTML: 'p',
+                parent: '.popup',
+                classnames: ['popup__price'],
+                text: this.price
+            }
+        }
+
+        return this.getHierarchizedComponent(likesCounterPopupSchema)
+    }
+
+}
+
